@@ -7,13 +7,6 @@ const passport = require("passport");
 const config = require("./config/");
 const app = express();
 
-//Routes
-const usersApiRoute = require("./api/users");
-const authApiRoute = require("./api/auth");
-
-app.use("/api/auth", authApiRoute);
-app.use("/api/users/", usersApiRoute);
-
 //Server init
 app.listen(config.port, () => {
   console.log("server at port", config.port);
@@ -38,3 +31,10 @@ app.use(function(req, res, next) {
   );
   next();
 });
+
+//Routes
+const usersApiRoute = require("./api/users");
+const authApiRoute = require("./api/auth");
+
+app.use("/api/auth", authApiRoute);
+app.use("/api/users/", usersApiRoute);

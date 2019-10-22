@@ -2,14 +2,17 @@ const passport = require("passport");
 const signToken = require("./signToken");
 const {sendGoodResponse} = require("../responses");
 const Boom = require("@hapi/boom");
+const debug = require("debug")("app:debug");
 
 require("./strategies/basic");
 
 function authenticateUser(req, res, next) {
   passport.authenticate("basic", function(error, user) {
     try {
+      debug(req.headers);
       if (error) {
         next(error);
+        debug(error);
       }
       if (!user) {
         next(Boom.unauthorized());
@@ -23,7 +26,7 @@ function authenticateUser(req, res, next) {
               email: user.email
             });
             sendGoodResponse({
-              response: res,
+              res,
               message: "good auth",
               data: {
                 user,

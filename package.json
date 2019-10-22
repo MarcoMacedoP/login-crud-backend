@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev:debug": "DEBUG=express:*,app:* npm run dev"
   },
   "keywords": [],
   "author": "",

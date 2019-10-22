@@ -12,6 +12,11 @@ const createBasicAuthHeader = require("../utils/auth/createBasicAuthHeader");
 ///Login and obtain token
 router.post("/login", async (req, res, next) => {
   try {
+    const {email, password} = req.body;
+    req.headers.authorization = createBasicAuthHeader(
+      email,
+      password
+    );
     await authenticateUser(req, res, next);
   } catch (error) {
     next(error);

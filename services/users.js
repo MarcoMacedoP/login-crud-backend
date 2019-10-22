@@ -7,8 +7,11 @@ class Users {
   getAll() {
     return this.mongodb.readAll({});
   }
-  getOne(userId) {
+  getOneById(userId) {
     return this.mongodb.readById(userId);
+  }
+  getOneByEmail(emial) {
+    return this.mongodb.readOne({emial});
   }
   insertOne(user) {
     return this.mongodb.createOne(user);

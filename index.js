@@ -2,7 +2,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const passport = require("passport");
-
+//jwt-strategy
+require("./utils/auth/strategies/jwt");
 //Config
 const config = require("./config/");
 const app = express();
@@ -37,4 +38,8 @@ const usersApiRoute = require("./api/users");
 const authApiRoute = require("./api/auth");
 
 app.use("/api/auth", authApiRoute);
-app.use("/api/users/", usersApiRoute);
+app.use(
+  "/api/users",
+  passport.authenticate("jwt", {session: false}),
+  usersApiRoute
+);

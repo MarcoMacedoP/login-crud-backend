@@ -47,8 +47,7 @@ router.delete("/:userId", async function(req, res, next) {
     sendGoodResponse({
       res,
       message: "removed user",
-      statusCode: 200,
-      data: updatedUser
+      statusCode: 200
     });
   } catch (error) {
     next();

@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const UserServices = require("../services/users");
 const {sendGoodResponse} = require("../utils/responses");
-
+const debug = require("debug")("app:users-api");
 router.get("/", async function(req, res, next) {
   const userServices = new UserServices();
 
@@ -12,6 +12,23 @@ router.get("/", async function(req, res, next) {
       message: "get all users",
       statusCode: 200,
       data: users
+    });
+  } catch (error) {
+    next();
+  }
+});
+
+router.get("/:userId", async function(req, res, next) {
+  const userServices = new UserServices();
+  const {userId} = req.params;
+  try {
+    debug(userId);
+    const user = await userServices.getOneById(userId);
+    sendGoodResponse({
+      res,
+      message: "get one user",
+      statusCode: 200,
+      data: user
     });
   } catch (error) {
     next();

@@ -2,6 +2,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const passport = require("passport");
+const cors = require("cors");
 //jwt-strategy
 require("./utils/auth/strategies/jwt");
 //Config
@@ -19,19 +20,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 // parse application/json
 app.use(bodyParser.json());
 // cors
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, authorization"
-  );
-  res.header(
-    "Access-Control-Allow-Methods",
-    "PUT, GET, POST, DELETE, OPTIONS, PATCH"
-  );
-  next();
-});
+app.use(
+  cors({
+    origin: /.*/,
+    credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE"
+  })
+);
 
 //Routes
 const usersApiRoute = require("./api/users");

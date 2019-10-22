@@ -1,5 +1,5 @@
 const passport = require("passport");
-const UserServices = require("../../services/users");
+const UserServices = require("../../../services/users");
 const Boom = require("@hapi/boom");
 const {BasicStrategy} = require("passport-http");
 const bcrypt = require("bcrypt");

@@ -39,18 +39,17 @@ router.put("/:userId", async function(req, res, next) {
   }
 });
 
-router.delete("/:userId", function(req, res, next) {
+router.delete("/:userId", async function(req, res, next) {
   const userServices = new UserServices();
-    const {userId} = req.params;
-    try {
-        await userServices.removeOne(userId);
-        sendGoodResponse({
-          res,
-          message: "removed user",
-          statusCode: 200,
-          data: updatedUser
-        });
-        
+  const {userId} = req.params;
+  try {
+    await userServices.removeOne(userId);
+    sendGoodResponse({
+      res,
+      message: "removed user",
+      statusCode: 200,
+      data: updatedUser
+    });
   } catch (error) {
     next();
   }
